@@ -1,0 +1,70 @@
+default:
+  watchpaths:
+    styles:
+      - ./app/styles/**/*.scss
+    scripts:
+      - ./app/angular/**/*.js
+    reload:
+      - ./app/views/**/*.html
+      - ./public/**/*.html
+  
+  files:
+    sources:
+      - ./node_modules/angular/angular.min.js.map
+      - ./app/assets/files/**/*
+    dest: ./public/assets/
+  
+  images:
+    sources:
+      - ./app/assets/images/**/*
+    dest: ./public/assets/
+  
+  styles:
+    sources:
+      - ./app/assets/styles/manifest.scss
+    concat: styles.min.css
+    dest: ./public/assets/
+    options:
+      sourcemap: true
+      style: nested
+      
+  scripts:
+    sources:
+      - ./app/angular/config/app_config.js
+      - ./app/angular/models/**/*.js
+      - ./app/angular/directives/*.js
+      - ./app/angular/controllers/*.js
+      - ./app/angular/config/routes.js
+    concat: app.min.js
+    dest: ./public/assets/
+    options:
+      sourcemap: true
+      
+  vendor:
+    sources:
+      - ./node_modules/angular/angular.min.js
+      - ./node_modules/angular-route/angular-route.min.js
+      - ./node_modules/angular-resource/angular-resource.min.js
+      # - ./node_modules/angular-sanitize/angular-sanitize.min.js
+      # - ./node_modules/angular-touch/angular-touch.min.js
+      # - ./node_modules/angular-dragula/dist/angular-dragula.min.js
+      # - ./node_modules/dropzone/dist/min/dropzone.min.js
+    concat: vendor.js
+    sourcemap: true
+    dest: ./public/assets/
+    
+  browsersync:
+    open: false
+    proxy: localhost:3000
+    
+  icons:
+    config: ./config/savage.yaml
+    source: ./app/assets/icons
+    concat: _icons.scss
+    dest:
+      stylesheet: ./public/assets/
+      fonts: ./public/assets/
+  
+test:
+
+production:

@@ -1,0 +1,14 @@
+(function() {
+  
+  app.controller('<%= @class_name %>Controller', [
+    <%- @deps.each do |dep| -%>
+    '<%= dep %>',
+    <%- end -%>
+    <%= @class_name %>Controller
+  ]);
+  
+  function <%= @class_name %>Controller(<%= @deps.join(", ") %>) {
+    // Your Code here
+  }
+  
+})();

@@ -1,0 +1,33 @@
+(function(){
+  
+  app.factory('<%= @class_name %>', [
+    <%- @deps.each do |dep| -%>
+    '<%= dep %>',
+    <%- end -%>
+    <%= @class_name %>
+  ]);
+  
+  function <%= @class_name %>(<%= @deps.join(", ") %>) {
+    
+    const object_root = '<%= @file_name %>';
+    
+    var transform = function(data) {
+      var object = {};
+      object[object_root] = data
+      return angular.toJson(object);
+    }
+    
+    return $resource("<%= @url %>/:id", {id:'@id'}, {
+      update: {
+        method: 'PUT',
+        transformRequest: transform
+      },
+      create: {
+        method: 'POST',
+        transformRequest: transform
+      }
+    });
+    
+  }
+  
+}())
